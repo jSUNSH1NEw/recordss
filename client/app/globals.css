@@ -1,0 +1,495 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+    --card: 0 0% 3%;
+    --card-foreground: 0 0% 100%;
+    --popover: 0 0% 3%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 270 100% 60%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 9%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 9%;
+    --muted-foreground: 0 0% 60%;
+    --accent: 310 100% 60%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 100% 50%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 0 0% 80%;
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    cursor: none;
+  }
+
+  @media (max-width: 768px) {
+    body {
+      cursor: auto;
+    }
+  }
+}
+
+/* Ajout de la classe text-reveal pour s'assurer que le texte est visible dès le début */
+.text-reveal {
+  opacity: 1;
+  transform: translateY(0);
+  animation: revealText 0.8s ease-out;
+}
+
+@keyframes revealText {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.gradient-text {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-red-400 via-blue-400 via-indigo-600 to-purple-800;
+}
+
+.gradient-bg {
+  @apply bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500;
+}
+
+.section {
+  @apply py-16 md:py-24 overflow-hidden;
+}
+
+.container-custom {
+  @apply container mx-auto px-4 md:px-8;
+}
+
+/* Modifier l'animation float pour la rendre plus subtile et élégante */
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Ajouter cette nouvelle animation pour la rotation lente */
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 15s linear infinite;
+}
+
+/* Glass effect */
+.glass-effect {
+  @apply bg-white/5 backdrop-blur-md border border-white/10;
+}
+
+/* Smooth transitions */
+.smooth-transition {
+  @apply transition-all duration-300 ease-in-out;
+}
+
+/* Button hover effect */
+.button-hover {
+  @apply relative overflow-hidden;
+}
+
+.button-hover::after {
+  content: "";
+  @apply absolute inset-0 bg-white/20 opacity-0 transition-opacity duration-300;
+}
+
+.button-hover:hover::after {
+  @apply opacity-100;
+}
+
+/* Button with icon spacing - CORRIGÉ */
+.btn-with-icon {
+  @apply flex items-center justify-center gap-3 px-6;
+}
+
+.btn-with-icon:hover svg {
+  @apply transform translate-x-1 transition-transform duration-300;
+}
+
+/* Social media buttons */
+.social-btn {
+  @apply flex items-center justify-center;
+}
+
+/* Card hover effect */
+.card-hover {
+  @apply transition-transform duration-300 ease-out;
+}
+
+.card-hover:hover {
+  @apply transform -translate-y-1;
+}
+
+/* Terminal styling */
+.terminal {
+  @apply font-mono text-sm space-y-2 bg-black/50 rounded-lg border border-white/10 p-4;
+}
+
+.terminal-line {
+  @apply opacity-0;
+  animation: typeIn 0.1s ease-out forwards;
+}
+
+@keyframes typeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Blinking cursor */
+.cursor-blink {
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  from,
+  to {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Minimal scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-white/10 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-white/20;
+}
+
+.card-fancy {
+  @apply relative overflow-hidden rounded-xl border border-white/10 bg-black/40 backdrop-blur-md;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-fancy:hover {
+  box-shadow: 0 15px 40px -10px rgba(0, 0, 0, 0.7), inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+}
+
+.card-fancy::before {
+  content: "";
+  @apply absolute -inset-0.5 rounded-xl opacity-0 transition-opacity duration-300;
+  background: linear-gradient(
+    45deg,
+    rgba(131, 58, 180, 0.5),
+    rgba(253, 29, 29, 0.5),
+    rgba(252, 176, 69, 0.5),
+    rgba(131, 58, 180, 0.5)
+  );
+  z-index: -1;
+}
+
+.card-fancy:hover::before {
+  @apply opacity-100;
+}
+
+.multi-color-border {
+  position: relative;
+}
+
+.multi-color-border::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(45deg, #ff3d00, #00c853, #2196f3, #651fff, #ff3d00);
+  border-radius: inherit;
+  z-index: -1;
+  animation: rotate 4s linear infinite;
+}
+
+@keyframes rotate {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.shadow-glow {
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+}
+
+.social-icon-link:hover svg {
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+}
+
+/* Styles pour les icônes sociales */
+.social-icon-link .hover-effect {
+  transition: all 0.3s ease;
+}
+
+.social-icon-link:hover .hover-effect {
+  transform: scale(1.15);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+}
+
+.social-footer-icon {
+  position: relative;
+}
+
+.social-footer-icon::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 50%;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.social-footer-icon:hover::after {
+  opacity: 1;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+  }
+}
+
+/* Styles pour les modales de cas d'utilisation */
+.use-case-modal {
+  backdrop-filter: blur(8px);
+}
+
+.use-case-modal-content {
+  background: linear-gradient(135deg, rgba(30, 30, 30, 0.8) 0%, rgba(20, 20, 20, 0.9) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+}
+
+.use-case-feature {
+  transition: all 0.2s ease;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.use-case-feature:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateX(5px);
+}
+
+.testimonial-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.testimonial-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, rgba(168, 85, 247, 0.05), rgba(236, 72, 153, 0.05), rgba(249, 115, 22, 0.05));
+  z-index: -1;
+}
+
+/* Footer avec bordure multicolore et angle */
+.footer-slant {
+  position: relative;
+  margin-top: 3rem;
+}
+
+.footer-slant::before {
+  content: "";
+  position: absolute;
+  top: -3rem;
+  left: 0;
+  right: 0;
+  height: 3rem;
+  background: linear-gradient(120deg, #6366f1, #ec4899, #f97316);
+  clip-path: polygon(0 100%, 100% 0, 100% 100%);
+  z-index: -1;
+}
+
+.footer-content {
+  position: relative;
+  background-color: hsl(var(--background));
+  border-top: 1px solid hsl(var(--border));
+}
+
+.footer-content::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #6366f1, #ec4899, #f97316);
+}
+
+.text-gradient {
+  background: linear-gradient(to right, #a855f7, #ec4899, #f97316);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+.hover-effect {
+  transition: all 0.3s ease;
+}
+
+.hover-effect:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+}
+
+/* Animation pour les éléments de la section hero */
+.animate-card {
+  opacity: 1;
+  transform: translateY(0);
+  animation: fadeInUp 0.8s ease-out;
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Animation pour les lignes de tableau */
+.table-row-animate {
+  opacity: 1;
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Animation pour le groupe de cartes */
+.card-group > div {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.card-group > div:nth-child(1) {
+  animation: cardAppear 0.5s ease-out;
+}
+
+.card-group > div:nth-child(2) {
+  animation: cardAppear 0.5s ease-out 0.1s forwards;
+}
+
+.card-group > div:nth-child(3) {
+  animation: cardAppear 0.5s ease-out 0.2s forwards;
+}
+
+.card-group > div:nth-child(4) {
+  animation: cardAppear 0.5s ease-out 0.3s forwards;
+}
+
+@keyframes cardAppear {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Animation pour la section de contenu */
+.section-content {
+  opacity: 1;
+  animation: sectionFadeIn 0.8s ease-out;
+}
+
+@keyframes sectionFadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
